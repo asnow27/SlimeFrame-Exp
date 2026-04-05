@@ -81,8 +81,6 @@ public final class SFrameStacks {
         return createPotion(type, Material.POTION);
     }
 
-    }
-
     public static final RandomItemStacks<RelicItemStack> RANDOM_LITH_RELICS = new RandomItemStacks<>();
     public static final RandomItemStacks<RelicItemStack> RANDOM_MESO_RELICS = new RandomItemStacks<>();
     public static final RandomItemStacks<RelicItemStack> RANDOM_NEO_RELICS = new RandomItemStacks<>();
