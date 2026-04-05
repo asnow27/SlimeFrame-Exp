@@ -14,7 +14,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionData;
+// PotionData dan PotionType lama sudah deprecated/dihapus di 1.21.4
 import org.bukkit.potion.PotionType;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -51,7 +51,8 @@ public final class SFrameStacks {
     @Nonnull
     public static ItemStack enchantedItem(@Nonnull Material m) {
         return new CustomItemStack(m, (meta) -> {
-            meta.addEnchant(Enchantment.LUCK, 1, false);
+            // Perbaikan 1: LUCK -> LUCK_OF_THE_SEA (1.21+)
+            meta.addEnchant(Enchantment.LUCK_OF_THE_SEA, 1, false);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         });
     }
@@ -61,8 +62,10 @@ public final class SFrameStacks {
         ItemStack potion = new ItemStack(recipient);
         PotionMeta meta = (PotionMeta) potion.getItemMeta();
         if (meta != null) {
-            meta.setBasePotionData(new PotionData(type));
-            meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+            // Perbaikan 2: PotionData dihapus. Langsung gunakan setBasePotionType
+            meta.setBasePotionType(type);
+            // Perbaikan 3: HIDE_POTION_EFFECTS -> HIDE_ADDITIONAL_TOOLTIP (1.20.5+)
+            meta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
             potion.setItemMeta(meta);
         }
         return potion;
@@ -76,6 +79,8 @@ public final class SFrameStacks {
     @Nonnull
     public static ItemStack createPotion(@Nonnull PotionType type) {
         return createPotion(type, Material.POTION);
+    }
+
     }
 
     public static final RandomItemStacks<RelicItemStack> RANDOM_LITH_RELICS = new RandomItemStacks<>();
