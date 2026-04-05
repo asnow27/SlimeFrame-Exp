@@ -148,7 +148,7 @@ public class MerchantSoulContract extends SimpleSlimefunItem<EntityInteractHandl
 
                 merchant.getWorld().playSound(merchant.getLocation(), Sound.ENTITY_VILLAGER_CELEBRATE, 1, 1.4F);
                 merchant.getWorld().spawnParticle(Particle.CRIMSON_SPORE, merchant.getLocation(), 10, 0, offset / 2, 0, 0);
-                merchant.getWorld().spawnParticle(Particle.ENCHANT_GLYPH, merchant.getLocation(), 5, 0.04, 1, 0.04);
+                merchant.getWorld().spawnParticle(Particle.ENCHANT, merchant.getLocation(), 5, 0.04, 1, 0.04);
 
                 e.setCancelled(true);
                 merchant.setHealth(0);
